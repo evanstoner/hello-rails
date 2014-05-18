@@ -2,58 +2,34 @@ require 'spec_helper'
 
 describe "Static pages" do
 
-  let(:base_title) { "Hello Rails"}
+  subject { page }
 
   describe "Home page" do
-  	it "should have the content 'Hello Rails'" do
-  		visit '/static_pages/home'
-  		expect(page).to have_content('Hello Rails')
-  	end
+    before { visit root_path }
 
-  	it "should have the base title" do
-  		visit '/static_pages/home'
-  		expect(page).to have_title("#{base_title}")
-  	end
-
-    it "should not have a custom page title" do
-      visit '/static_pages/home'
-      expect(page).not_to have_title('Home')
-    end
+    it { should have_content('Hello Rails') }
+    it { should have_title(full_title('')) }
+    it { should_not have_title('Home') }
   end
 
   describe "Help page" do
-  	it "should have the content 'Help'" do
-  		visit '/static_pages/help'
-  		expect(page).to have_content('Help')
-  	end
+    before { visit help_path }
 
-  	it "should have the right title" do
-  		visit '/static_pages/help'
-  		expect(page).to have_title("Help - #{base_title}")
-  	end
+    it { should have_content('Help') }
+    it { should have_title(full_title('Help')) }
   end
 
   describe "About page" do
-  	it "should have the content 'About'" do
-  		visit '/static_pages/about'
-  		expect(page).to have_content('About')
-  	end
+  	before { visit about_path }
 
-  	it "should have the right title" do
-  		visit '/static_pages/about'
-  		expect(page).to have_title("About - #{base_title}")
-  	end
+    it { should have_content('About') }
+    it { should have_title(full_title('About')) }
   end
 
   describe "Contact page" do
-    it "should have the content 'Contact'" do
-      visit '/static_pages/contact'
-      expect(page).to have_content('Contact')
-    end
+    before { visit contact_path }
 
-    it "should have the right title" do
-      visit '/static_pages/contact'
-      expect(page).to have_title("Contact - #{base_title}")
-    end
+    it { should have_content('Contact') }
+    it { should have_title(full_title('Contact')) }
   end
 end
